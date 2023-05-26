@@ -1,6 +1,12 @@
 import "./App.css"
+import Cadastro from "./Componentes/Cadastro";
 import Listagem from "./Componentes/Listagem"
+import { useState } from "react";
+import React from "react";
+
 function App() {
+ 
+  
   const Usuario = {
     //chave: valor
     nome: "Felipe",
@@ -14,15 +20,16 @@ function App() {
     vacinas_covid19: ["Coronavac", "Coronavac", "Pfizer", "J&J", "Outra"]
   }
   
-  const usuarios = [
+  const usuarios_padrao = [
       {nome: "Felipe", status: true},
       {nome: "Conrado", status: true},
       {nome: "Maria", status: false},
       {nome: "Pedrita", status: false}
   ] 
-console.log(usuarios)
+  
+  const [ usuarios, alteraUsuarios ] = React.useState( usuarios_padrao );
 
-
+  //console.log(usuarios)
   //console.log(Usuario)
   //console.log(Usuario.endereco.rua, Usuario.endereco.complemento)
   //console.log(Object.keys(Usuario))
@@ -30,10 +37,7 @@ console.log(usuarios)
    <div className="container">
     <div className="d-flex justify-content-around">
     <Listagem usuarios={usuarios}/>
-    
-     <div className="caixa"> 
-      <h2> Cadastro </h2>
-    </div>
+    <Cadastro usuarios={usuarios} alteraUsuarios={alteraUsuarios}/>
     
     </div>
 </div>
