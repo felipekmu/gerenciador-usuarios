@@ -30,7 +30,7 @@ function Cadastro(props){
   <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com"/>
   <label for="floatingInput">Email para Cadastro</label>
 </div>
-
+<button type="submit" class="btn btn-primary">Cadastrar</button>
 </div>
 
 )
