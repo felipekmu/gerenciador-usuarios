@@ -28,7 +28,8 @@ function App() {
       {nome: "Pedrita", email:"pedrita@gmail.com", status: false}
   ] 
   
-  const [ usuarios, setUsuarios ] = React.useState( usuarios_padrao );
+  const [ usuarios, alteraUsuarios ] = React.useState( usuarios_padrao );
+  const [ editando, alteraEditando ] = React.useState(null);
 
   //console.log(usuarios)
   //console.log(Usuario)
@@ -49,8 +50,8 @@ function App() {
                         theme="dark"
                     />
     <div className="d-flex justify-content-around">
-    <Listagem usuarios={usuarios}/>
-    <Cadastro usuarios={usuarios} setUsuarios={setUsuarios}/>
+    <Listagem alteraEditando={alteraEditando} usuarios={usuarios}/>
+    <Cadastro usuarios={usuarios} alteraUsuarios={alteraUsuarios}/>
     
     </div>
 </div>
