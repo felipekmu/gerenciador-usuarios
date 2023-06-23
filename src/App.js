@@ -1,36 +1,30 @@
 import "./App.css"
 import Cadastro from "./Componentes/Cadastro";
 import Listagem from "./Componentes/Listagem"
-import { useState } from "react";
+import supabase from "./supabase";
 import React from "react";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
 function App() {
- 
-  
-  const Usuario = {
-    //chave: valor
-    nome: "Felipe",
-    idade: 19,
-    status: true,
-    endereco: {
-      rua: "Rua X",
-      numero: 139,
-      complemento: "ap 20"
-    },
-    vacinas_covid19: ["Coronavac", "Coronavac", "Pfizer", "J&J", "Outra"]
-  }
-  
-  const usuarios_padrao = [
-      {nome: "Felipe", email:"felipe@gmail.com", status: true},
-      {nome: "Conrado", email:"conrado@gmail.com", status: true},
-      {nome: "Maria", email:"maria@gmail.com", status: false},
-      {nome: "Pedrita", email:"pedrita@gmail.com", status: false}
-  ] 
-  
-  const [ usuarios, alteraUsuarios ] = React.useState( usuarios_padrao );
+  const [ usuarios, alteraUsuarios ] = React.useState( [] );
   const [ editando, alteraEditando ] = React.useState(null);
 
+function buscaTodos(){
+  supabase.from("usuarios").select()
+  .then( response => {
+    console.log("Conexão bem sucedida!");
+    console.log( response.data );
+    alteraUsuarios( response.data );
+  } )
+  .catch( response => {
+    console.log("Deu erro na conexão");
+    console.log( response )
+  } )
+}
+
+React.useEffect( ()=> {
+  buscaTodos();
+}, [] )
   //console.log(usuarios)
   //console.log(Usuario)
   //console.log(Usuario.endereco.rua, Usuario.endereco.complemento)
